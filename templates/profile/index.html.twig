@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre Profil{% endblock %}
+
+{% block body %}
+    <h1 class="mt-4 mb-4 text-center">Bienvenue sur votre profil</h1>
+
+    <div class="d-flex flex-column align-items-center">
+        <div>
+            {% if app.user.profile.image is not null %}
+
+                <img style="border-radius: 50%" src="{{ vich_uploader_asset(app.user.profile.image, 'imageFile')|imagine_filter('petite_vignette') }}" alt="">
+
+            {% else %}
+                <img style="border-radius: 50%" src="{{ asset('/images/profilepicturebase.png')|imagine_filter('petite_vignette') }}">
+            {% endif %}
+        </div>
+        <div class="d-flex mt-3 justify-content-center">
+            {% if app.user.profile.firstName is not null and app.user.profile.lastName is not null %}
+                <p class="mb-0"><strong>{{ app.user.profile.firstName }} {{ app.user.profile.lastName }}</strong></p>
+            {% else %}
+                <p class="mb-0"><strong>Ici votre prénom et votre nom</strong></p>
+            {% endif %}
+        </div>
+        <div class="border border-dark mt-4">
+            <p class="text-center p-4 mb-0"><strong>
+                    {% if app.user.profile.description is not null %}
+                        {{ app.user.profile.description }}
+                    {% else %}
+                        Ici votre description
+                    {% endif %}
+                </strong></p>
+        </div>
+        <div>
+            <a href="{{ path('app_profile_edit') }}" class="btn btn-primary mt-5">MODIFIER VOTRE PROFIL</a>
+        </div>
+        <div>
+            <a href="{{ path('app_property_create') }}" class="btn btn-success mt-5">AJOUTER UNE PROPRIETE</a>
+        </div>
+    </div>
+{% endblock %}

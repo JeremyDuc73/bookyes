@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PropertyController!{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5">Ajouter une propriété</h1>
+    {{ form_start(propertyForm) }}
+    {{ form_row(propertyForm.name) }}
+    {{ form_row(propertyForm.description) }}
+    {{ form_row(propertyForm.country) }}
+    {{ form_row(propertyForm.adress) }}
+    {{ form_row(propertyForm.star) }}
+    {{ form_row(propertyForm.website) }}
+    <button type="submit" class="btn btn-success">VALIDER</button>
+    {{ form_end(propertyForm) }}
+{% endblock %}
