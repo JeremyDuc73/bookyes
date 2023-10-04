@@ -4,4 +4,10 @@
 
 {% block body %}
     <h1>SALUT</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="d-flex mt-3">
+            <a href="{{ path('app_propertycat') }}" class="btn btn-success ms-3">VOIR LES CATEGORIES</a>
+            <a href="{{ path('app_equipment') }}" class="btn btn-success ms-3">VOIR LES EQUIPEMENTS</a>
+        </div>
+    {% endif %}
 {% endblock %}

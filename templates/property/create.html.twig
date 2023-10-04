@@ -5,12 +5,19 @@
 {% block body %}
     <h1 class="mt-5">Ajouter une propriété</h1>
     {{ form_start(propertyForm) }}
-    {{ form_row(propertyForm.name) }}
+    {{ form_label(propertyForm.name, "Nom de l'établissement") }}
+    {{ form_widget(propertyForm.name) }}
+    {{ form_row(propertyForm.propertyCategory) }}
     {{ form_row(propertyForm.description) }}
-    {{ form_row(propertyForm.country) }}
-    {{ form_row(propertyForm.adress) }}
-    {{ form_row(propertyForm.star) }}
-    {{ form_row(propertyForm.website) }}
+    {{ form_label(propertyForm.country, 'Pays') }}
+    {{ form_widget(propertyForm.country) }}
+    {{ form_label(propertyForm.adress, 'Adresse') }}
+    {{ form_widget(propertyForm.adress) }}
+    {{ form_label(propertyForm.star, "Nombre d'étoile(s)") }}
+    {{ form_widget(propertyForm.star) }}
+    {{ form_label(propertyForm.website, 'Lien vers votre site internet') }}
+    {{ form_widget(propertyForm.website) }}
+    {{ form_row(propertyForm.equipments) }}
     <button type="submit" class="btn btn-success">VALIDER</button>
     {{ form_end(propertyForm) }}
 {% endblock %}

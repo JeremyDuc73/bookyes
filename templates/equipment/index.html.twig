@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des équipements{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_equipment_create') }}" class="btn btn-success mt-5 mb-4">CREER UN NOUVEL EQUIPEMENT</a>
+    {% for equipment in equipments %}
+        <div class="border border-dark m-4 p-3 d-flex justify-content-between">
+            <h3>{{ equipment.name }}</h3>
+            <div>
+                <a href="{{ path('app_equipment_edit', {id:equipment.id}) }}" class="btn btn-warning">MODIFIER</a>
+                <a href="{{ path('app_equipment_delete', {id:equipment.id}) }}" class="btn btn-danger">SUPPRIMER</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
