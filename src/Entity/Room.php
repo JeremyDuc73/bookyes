@@ -21,12 +21,18 @@ class Room
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'room')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?RoomKind $roomKind = null;
-
     #[ORM\ManyToMany(targetEntity: Bed::class, mappedBy: 'room')]
     private Collection $beds;
+
+    #[ORM\ManyToOne(inversedBy: 'rooms')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Property $property = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\Column]
+    private ?int $occupants = null;
 
     public function __construct()
     {
@@ -62,18 +68,6 @@ class Room
         return $this;
     }
 
-    public function getRoomKind(): ?RoomKind
-    {
-        return $this->roomKind;
-    }
-
-    public function setRoomKind(?RoomKind $roomKind): static
-    {
-        $this->roomKind = $roomKind;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Bed>
      */
@@ -97,6 +91,42 @@ class Room
         if ($this->beds->removeElement($bed)) {
             $bed->removeRoom($this);
         }
+
+        return $this;
+    }
+
+    public function getProperty(): ?Property
+    {
+        return $this->property;
+    }
+
+    public function setProperty(?Property $property): static
+    {
+        $this->property = $property;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getOccupants(): ?int
+    {
+        return $this->occupants;
+    }
+
+    public function setOccupants(int $occupants): static
+    {
+        $this->occupants = $occupants;
 
         return $this;
     }

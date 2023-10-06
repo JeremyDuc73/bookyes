@@ -45,9 +45,13 @@ class Property
     #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'properties', cascade: ['persist'])]
     private Collection $equipments;
 
+    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Room::class, orphanRemoval: true)]
+    private Collection $rooms;
+
     public function __construct()
     {
         $this->equipments = new ArrayCollection();
+        $this->rooms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -173,6 +177,36 @@ class Property
     {
         if ($this->equipments->removeElement($equipment)) {
             $equipment->removeProperty($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Room>
+     */
+    public function getRooms(): Collection
+    {
+        return $this->rooms;
+    }
+
+    public function addRoom(Room $room): static
+    {
+        if (!$this->rooms->contains($room)) {
+            $this->rooms->add($room);
+            $room->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoom(Room $room): static
+    {
+        if ($this->rooms->removeElement($room)) {
+            // set the owning side to null (unless already changed)
+            if ($room->getProperty() === $this) {
+                $room->setProperty(null);
+            }
         }
 
         return $this;

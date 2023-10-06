@@ -7,6 +7,8 @@
         <div class="border border-dark mt-4 mb-4 p-3">
             <h3>{{ property.name }}</h3>
             <p class="border">{{ property.propertyCategory.name }}</p>
+            <a href="{{ path('app_property_delete', {id:property.id}) }}" class="btn btn-danger">SUPPRIMER</a>
+            <a href="{{ path('app_rooms', {id:property.id}) }}" class="btn btn-danger">VOIR MES HEBERGEMENTS</a>
         </div>
     {% endfor %}
 {% endblock %}

@@ -65,6 +65,6 @@ class PropertyController extends AbstractController
     {
         $manager->remove($property);
         $manager->flush();
-        return $this->redirectToRoute('app_profile');
+        return $this->redirectToRoute('app_myproperties');
     }
 }

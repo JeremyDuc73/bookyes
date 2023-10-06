@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hébergements{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5">Voici vos hébergements pour {{ property.name }}</h1>
+        {% for property in app.user.profile.properties %}
+            <div class="border boder-dark text-center p-3 mt-4 mb-3">
+                {% if property.rooms is not empty %}
+                    <div>
+                        {% for room in property.rooms %}
+                            <h4>{{ room.name }}</h4>
+                            <a href="" class="btn btn-warning me-4">MODIFIER</a>
+                            <a href="" class="btn btn-danger">SUPPRIMER</a>
+                        {% endfor %}
+                </div>
+                {% else %}
+                    <h3 class="mt-4 mb-4">Vous n'avez pas d'hébergements pour cette propriété</h3>
+                {% endif %}
+            </div>
+        {% endfor %}
+    <a style="margin-right: auto;margin-left: auto;display: block" href="{{ path('app_room_create', {id:property.id}) }}" class="mt-4 btn btn-success">AJOUTER UN NOUVEL HEBERGEMENT</a>
+{% endblock %}
