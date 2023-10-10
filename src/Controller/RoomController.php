@@ -50,4 +50,16 @@ class RoomController extends AbstractController
             'edit'=>$edit
         ]);
     }
+
+    #[Route('/rooms/delete/{id}', name: 'app_room_delete', priority: 2)]
+    public function delete(EntityManagerInterface $manager, Room $room): Response
+    {
+        $propiD = $room->getProperty()->getId();
+        dd($room);
+        $manager->remove($room);
+        $manager->flush();
+        return $this->redirectToRoute('app_rooms', [
+            'id'=>$propiD
+        ]);
+    }
 }
