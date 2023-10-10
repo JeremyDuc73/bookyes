@@ -21,7 +21,7 @@ class Room
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\ManyToMany(targetEntity: Bed::class, mappedBy: 'room')]
+    #[ORM\ManyToMany(targetEntity: Bed::class, mappedBy: 'room', cascade: ["remove"])]
     private Collection $beds;
 
     #[ORM\ManyToOne(inversedBy: 'rooms')]

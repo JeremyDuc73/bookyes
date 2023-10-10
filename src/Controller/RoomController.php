@@ -55,7 +55,6 @@ class RoomController extends AbstractController
     public function delete(EntityManagerInterface $manager, Room $room): Response
     {
         $propiD = $room->getProperty()->getId();
-        dd($room);
         $manager->remove($room);
         $manager->flush();
         return $this->redirectToRoute('app_rooms', [
