@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Property;
 use App\Entity\Room;
 use App\Form\RoomType;
+use App\Repository\RoomRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,11 +53,19 @@ class RoomController extends AbstractController
     }
 
     #[Route('/rooms/delete/{id}', name: 'app_room_delete', priority: 2)]
-    public function delete(EntityManagerInterface $manager, Room $room): Response
+    public function delete(EntityManagerInterface $manager, Room $room, RoomRepository $roomRepository): Response
     {
         $propiD = $room->getProperty()->getId();
-        $manager->remove($room);
-        $manager->flush();
+
+
+        $query = $roomRepository
+            ->createQueryBuilder('du')
+            ->delete('App:Room','du')
+            ->where('du.id = :id')
+            ->setParameter("id", $room->getId())
+            ->getQuery()
+            ->execute();
+
         return $this->redirectToRoute('app_rooms', [
             'id'=>$propiD
         ]);

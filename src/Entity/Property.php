@@ -45,7 +45,7 @@ class Property
     #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'properties', cascade: ['persist'])]
     private Collection $equipments;
 
-    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Room::class, orphanRemoval: false)]
+    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Room::class, orphanRemoval: true)]
     private Collection $rooms;
 
     public function __construct()
