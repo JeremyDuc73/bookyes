@@ -52,6 +52,15 @@ class RoomController extends AbstractController
         ]);
     }
 
+    #[Route('/room/{id}', name: 'app_room_show')]
+    public function show(Room $room): Response
+    {
+
+        return $this->render('room/show.html.twig', [
+            'room' => $room
+        ]);
+    }
+
     #[Route('/rooms/delete/{id}', name: 'app_room_delete', priority: 2)]
     public function delete(EntityManagerInterface $manager, Room $room, RoomRepository $roomRepository): Response
     {

@@ -34,6 +34,9 @@ class Profile
     #[ORM\OneToMany(mappedBy: 'profile', targetEntity: Property::class, orphanRemoval: true)]
     private Collection $properties;
 
+    #[ORM\OneToOne(mappedBy: 'profile', cascade: ['persist', 'remove'])]
+    private ?Test $test = null;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
@@ -130,6 +133,28 @@ class Profile
                 $property->setProfile(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTest(): ?Test
+    {
+        return $this->test;
+    }
+
+    public function setTest(?Test $test): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($test === null && $this->test !== null) {
+            $this->test->setProfile(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($test !== null && $test->getProfile() !== $this) {
+            $test->setProfile($this);
+        }
+
+        $this->test = $test;
 
         return $this;
     }

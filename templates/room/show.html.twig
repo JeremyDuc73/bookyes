@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hébergements{% endblock %}
+
+{% block body %}
+    <h1 class="mt-5">Informations sur votre {{ room.name }}</h1>
+    <div class="container">
+        <ul>
+            <li>Prix de la chambre : {{ room.price }} €</li>
+            <li>Nombre max d'hébergements : {{ room.number }}</li>
+            <li>Nombre d'occupants max : {{ room.occupants }}</li>
+        </ul>
+    </div>
+    <div class="container">
+            <div class="border boder-dark text-center p-3 mt-4 mb-3">
+                {% if room.beds is not empty %}
+                    <div>
+                        {% for bed in room.beds %}
+                            <h4>{{ bed.kind }}</h4>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+    </div>
+
+{% endblock %}

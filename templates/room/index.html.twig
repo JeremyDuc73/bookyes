@@ -10,7 +10,8 @@
                     <div>
                         {% for room in property.rooms %}
                             <h4>{{ room.name }}</h4>
-                            <a href="" class="btn btn-warning me-4">MODIFIER</a>
+                            <a href="{{ path('app_room_show', {id:room.id}) }}" class="btn btn-success me-4">VOIR PLUS</a>
+                            <a href="{{ path('app_room_edit', {id:property.id, roomId:room.id}) }}" class="btn btn-warning">MODIFIER L'HEBERGEMENT</a>
                             <a href="{{ path('app_room_delete', {id:room.id}) }}" class="btn btn-danger">SUPPRIMER</a>
                         {% endfor %}
                 </div>
